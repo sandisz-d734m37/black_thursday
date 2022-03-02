@@ -224,6 +224,19 @@ class SalesAnalyst
     merchant_by_revenue[0..(x-1)]
    end
 
-   
+  def merchants_with_pending_invoices
+    all_inv = []
+    inv_to_check = @transactions.find_all_by_result("failed")
+    inv_to_check = inv_to_check.map {|inv| inv.invoice_id}
+    inv_to_check = inv_to_check.map {|inv_id| @invoices.find_by_id(inv_id)}
+    inv_to_check = inv_to_check.map {|inv| inv.merchant_id}.uniq
+    all_inv << inv_to_check
+    inv_to_check2 = @invoices.find_all_by_status(:pending)
+    inv_to_check2 = inv_to_check2.map {|inv|inv.merchant_id}.uniq
+    all_inv << inv_to_check2
+    all_inv = all_inv.flatten.uniq
+    binding.pry
+    all_inv.map {|merchant_id| @merchants.find_by_id(merchant_id)}
+  end
 
 end
