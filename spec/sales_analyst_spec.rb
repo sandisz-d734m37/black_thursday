@@ -148,4 +148,12 @@ describe SalesAnalyst do
     expect(expected).to eq 21067.77
     expect(expected.class).to eq BigDecimal
   end
+
+  it "can give total revenue for a given date" do
+    date = Time.parse("2009-02-07")
+    expcted = @sales_analyst.total_revenue_by_date(date)
+    expect(expected).to eq(21067.77)
+    expect(expected.class).to eq(BigDecimal)
+  end
+
 end
