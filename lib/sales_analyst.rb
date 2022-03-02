@@ -200,8 +200,8 @@ class SalesAnalyst
   end
 
   def total_revenue_by_date(date)
-    
-
-
+    inv_to_check = @invoices.find_all_by_date(date)
+    inv_to_check = inv_to_check.map{|inv| inv.id}
+    inv_to_check.map{|inv| invoice_total(inv)}.sum
   end
 end
