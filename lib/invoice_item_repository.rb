@@ -43,7 +43,9 @@ class InvoiceItemRepository
   end
 
   def find_all_by_date(date)
-    @all.find_all{|invoice| invoice.created_at == date}
+    @all.find_all{|invoice|
+   invoice.created_at[0..9] == date}
+   # binding.pry}
   end
 
 end
