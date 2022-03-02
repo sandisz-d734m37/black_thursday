@@ -31,9 +31,4 @@ class InvoiceItem
     price_to_dollars = @unit_price.to_f
   end
 
-  def find_all_by_date(date)
-    all.find_all{|invoice| invoice.created_at == date}
-
-  end
-
 end
