@@ -178,4 +178,14 @@ describe SalesAnalyst do
     expect(@sales_analyst.merchants_with_only_one_item.length).to eq(243)
     expect(@sales_analyst.merchants_with_only_one_item.first.class).to eq(Merchant)
   end
+
+  it "can find the total revenue for a single merchant" do
+    # require 'pry'; binding.pry
+    expect(@sales_analyst.revenue_by_merchant(12334194)).to eq(BigDecimal(81572.4, 6))
+    expect(@sales_analyst.revenue_by_merchant(12334194).class).to eq(BigDecimal)
+  end
+
+  it "can return merchants that only sell one item by the month" do
+    expect(@sales_analyst.merchants_with_only_one_item_registered_in_month("June").length).to eq(18)
+  end
 end
