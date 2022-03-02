@@ -156,4 +156,11 @@ describe SalesAnalyst do
     expect(expected.class).to eq(BigDecimal)
   end
 
+  it "can return the top merchants ranked by revenue" do
+    expect(@sales_analyst.top_revenue_earners(10).first.id).to eq(12334634)
+    expect(@sales_analyst.top_revenue_earners(10).last.id).to eq(12335747)
+    expect(@sales_analyst.top_revenue_earners(10).length).to eq(10)
+    expect(@sales_analyst.top_revenue_earners(10).last.class).to eq(Merchant)
+  end
+
 end
