@@ -207,9 +207,13 @@ class SalesAnalyst
 
   def total_revenue_by_merchant(merchant_id)
     inv_to_check = @invoices.find_all_by_merchant_id(merchant_id)
-    inv_to_check = inv_to_check.each{|inv| inv_to_check.delete(inv) if inv.status != :success}
     inv_to_check = inv_to_check.map{|inv| inv.id}
-    inv_to_check.map{|inv| invoice_total(inv)}.sum
+    inv_to_check2 = Array.new
+    inv_to_check.each {|inv| inv_to_check2 << @transactions.find_all_by_invoice_id(inv)}
+    inv_to_check2.flatten!
+    inv_to_check2 = inv_to_check2.find_all {|transactions| transactions.result == "success"}
+    inv_to_check2 = inv_to_check2.map{|transaction| transaction.invoice_id}.uniq
+    inv_to_check2.map{|inv| invoice_total(inv)}.sum
   end
 
   def top_revenue_earners(x = 20)
