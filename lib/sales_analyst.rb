@@ -205,7 +205,7 @@ class SalesAnalyst
     inv_to_check.map{|inv| invoice_total(inv)}.sum
   end
 
-  def total_revenue_by_merchant(merchant_id)
+  def revenue_by_merchant(merchant_id)
     inv_to_check = @invoices.find_all_by_merchant_id(merchant_id)
     inv_to_check = inv_to_check.map{|inv| inv.id}
     # inv_to_check2 = Array.new
@@ -219,7 +219,7 @@ class SalesAnalyst
 
   def top_revenue_earners(x = 20)
     merchant_by_revenue = Hash.new(0)
-    test = @merchants.all.each {|merchant| merchant_by_revenue[merchant] = total_revenue_by_merchant(merchant.id)}
+    test = @merchants.all.each {|merchant| merchant_by_revenue[merchant] = revenue_by_merchant(merchant.id)}
     merchant_by_revenue = merchant_by_revenue.sort_by{|k, v| v}.reverse
     merchant_by_revenue = merchant_by_revenue.map {|index| index[0]}
     merchant_by_revenue[0..(x-1)]
@@ -236,7 +236,6 @@ class SalesAnalyst
     inv_to_check2 = inv_to_check2.map {|inv|inv.merchant_id}.uniq
     all_inv << inv_to_check2
     all_inv = all_inv.flatten.uniq
-     binding.pry
     all_inv.map {|merchant_id| @merchants.find_by_id(merchant_id)}
   end
 
@@ -248,4 +247,13 @@ class SalesAnalyst
     merchant_counts.map {|merch_id| @merchants.find_by_id(merch_id[0])}
   end
 
+  def merchants_with_only_one_item_registered_in_month(month_name)
+    registered_date = Hash.new(0)
+    merchants_with_only_one_item.each {|merchant| registered_date[merchant] = Date.parse(merchant.created_at) }
+    months_hash = Hash.new(0)
+    registered_date.each {|merchant, date| months_hash[merchant] = date.mon}
+    month_number = Date::MONTHNAMES.index(month_name)
+    arry = months_hash.select {|k, v| k if v == month_number}
+    arry.map{|merchant| merchant[0]}
+  end
 end
