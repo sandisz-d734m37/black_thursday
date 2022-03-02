@@ -169,8 +169,13 @@ describe SalesAnalyst do
     expect(@sales_analyst.top_revenue_earners.length).to eq(20)
   end
 
-  it "will return all merchants with pending invoices" do 
+  it "will return all merchants with pending invoices" do
     expect(@sales_analyst.merchants_with_pending_invoices.length).to eq(467)
     expect(@sales_analyst.merchants_with_pending_invoices.first.class).to eq(Merchant)
+  end
+
+  it "can determine merchants with only 1 item" do
+    expect(@sales_analyst.merchants_with_only_one_item.length).to eq(243)
+    expect(@sales_analyst.merchants_with_only_one_item.first.class).to eq(Merchant)
   end
 end

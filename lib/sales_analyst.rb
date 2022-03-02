@@ -239,4 +239,8 @@ class SalesAnalyst
     all_inv.map {|merchant_id| @merchants.find_by_id(merchant_id)}
   end
 
+  def method_name
+
+  end
+
 end
