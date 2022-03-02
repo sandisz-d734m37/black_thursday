@@ -198,4 +198,10 @@ class SalesAnalyst
     prices_array = to_check.map {|items| (items.unit_price * items.quantity)}
     prices_array.sum
   end
+
+  def total_revenue_by_date(date)
+    
+
+
+  end
 end
