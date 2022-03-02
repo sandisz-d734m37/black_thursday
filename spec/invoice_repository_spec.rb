@@ -88,4 +88,8 @@ RSpec.describe InvoiceRepository do
     expect(@se.invoices.find_by_id(4986)).to eq(nil)
   end
 
+  it "can find all by date" do
+    expect(@se.invoices.find_all_by_date("2009-02-07").length).to eq(1)
+  end
+
 end
