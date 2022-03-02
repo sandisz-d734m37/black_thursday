@@ -224,4 +224,5 @@ class SalesAnalyst
     merchant_by_revenue[0..(x-1)]
    end
 
+
 end

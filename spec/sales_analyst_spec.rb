@@ -163,11 +163,9 @@ describe SalesAnalyst do
     expect(@sales_analyst.top_revenue_earners(10).last.class).to eq(Merchant)
   end
 
-  # it "can determine top earners" do
-  #   expect(@sales_analyst.top_revenue_earners).to eq("?")
-  # end
-
-# 12334942
-# 12335329
-
+  it "will return the top 20 merchants by default" do
+    expect(@sales_analyst.top_revenue_earners.first.id).to eq(12334634)
+    expect(@sales_analyst.top_revenue_earners.last.id).to eq(12334159)
+    expect(@sales_analyst.top_revenue_earners.length).to eq(20)
+  end
 end
