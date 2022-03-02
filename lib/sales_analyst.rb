@@ -235,12 +235,16 @@ class SalesAnalyst
     inv_to_check2 = inv_to_check2.map {|inv|inv.merchant_id}.uniq
     all_inv << inv_to_check2
     all_inv = all_inv.flatten.uniq
-    binding.pry
+    # binding.pry
     all_inv.map {|merchant_id| @merchants.find_by_id(merchant_id)}
   end
 
-  def method_name
-
+  def merchants_with_only_one_item
+    merchant_counts = Hash.new(0)
+    merchants_to_check = @items.all.map {|item| item.merchant_id}
+    merchants_to_check.each {|merch_id| merchant_counts[merch_id]+= 1}
+    merchant_counts = merchant_counts.find_all {|merch_id, count| count == 1}
+    merchant_counts.map {|merch_id| @merchants.find_by_id(merch_id[0])}
   end
 
 end
