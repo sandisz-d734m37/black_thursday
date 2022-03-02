@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/spec/sales_analyst_spec.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/spec/sales_analyst_spec.rb": {
         "lines": [
           1,
           1,
@@ -84,43 +84,8 @@
           0,
           null,
           null,
-          null,
           1,
           0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          1,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
           0,
           null,
           null,
@@ -138,6 +103,39 @@
           1,
           0,
           0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
           null,
           0,
           0,
@@ -150,15 +148,45 @@
           null,
           null,
           1,
-          1,
+          0,
           null,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          1,
           1,
           1,
           null,
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/sales_engine.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/sales_engine.rb": {
         "lines": [
           1,
           1,
@@ -197,7 +225,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/item_repository.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/item_repository.rb": {
         "lines": [
           1,
           1,
@@ -261,7 +289,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/item.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/item.rb": {
         "lines": [
           1,
           null,
@@ -292,11 +320,11 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/sales_module.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/sales_module.rb": {
         "lines": [
           1,
           1,
-          0,
+          119996,
           null,
           null,
           1,
@@ -315,7 +343,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/merchant_repository.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/merchant_repository.rb": {
         "lines": [
           1,
           1,
@@ -369,7 +397,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/merchant.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/merchant.rb": {
         "lines": [
           1,
           null,
@@ -392,7 +420,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/customer_repository.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/customer_repository.rb": {
         "lines": [
           1,
           1,
@@ -443,7 +471,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/customer.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/customer.rb": {
         "lines": [
           1,
           null,
@@ -468,7 +496,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/sales_analyst.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/sales_analyst.rb": {
         "lines": [
           1,
           1,
@@ -666,14 +694,64 @@
           null,
           null,
           1,
+          0,
+          0,
+          0,
+          null,
+          null,
           1,
-          9,
+          0,
+          0,
+          0,
+          null,
+          null,
           1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          1,
+          2,
+          2736,
+          2736,
+          952,
+          null,
+          488,
+          null,
           null,
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/invoice_repository.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/invoice_repository.rb": {
         "lines": [
           1,
           1,
@@ -726,6 +804,9 @@
           0,
           null,
           null,
+          1,
+          0,
+          0,
           null,
           null,
           1,
@@ -734,7 +815,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/invoice.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/invoice.rb": {
         "lines": [
           1,
           null,
@@ -760,7 +841,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/transaction_repository.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/transaction_repository.rb": {
         "lines": [
           1,
           1,
@@ -816,7 +897,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/transaction.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/transaction.rb": {
         "lines": [
           1,
           1,
@@ -850,7 +931,7 @@
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/invoice_item_repository.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/invoice_item_repository.rb": {
         "lines": [
           1,
           1,
@@ -874,32 +955,38 @@
           null,
           null,
           1,
-          21831,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           0,
           null,
           null,
           1,
           0,
           0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          1,
           0,
           0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
           null,
           null,
           null
         ]
       },
-      "/Users/coryb/Turing/1_Mod/projects/black_thursday/lib/invoice_item.rb": {
+      "/Users/bradleyhutchins/Turing/1module/Projects/black_thursday/lib/invoice_item.rb": {
         "lines": [
           1,
           1,
@@ -938,6 +1025,6 @@
         ]
       }
     },
-    "timestamp": 1646100714
+    "timestamp": 1646206349
   }
 }

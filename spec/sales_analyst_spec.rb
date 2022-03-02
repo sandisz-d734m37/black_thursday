@@ -148,4 +148,34 @@ describe SalesAnalyst do
     expect(expected).to eq 21067.77
     expect(expected.class).to eq BigDecimal
   end
+
+  it "can give total revenue for a given date" do
+    date = "2009-02-07"
+    expected = @sales_analyst.total_revenue_by_date(date)
+    expect(expected).to eq(21067.77)
+    expect(expected.class).to eq(BigDecimal)
+  end
+
+  it "can return the top merchants ranked by revenue" do
+    expect(@sales_analyst.top_revenue_earners(10).first.id).to eq(12334634)
+    expect(@sales_analyst.top_revenue_earners(10).last.id).to eq(12335747)
+    expect(@sales_analyst.top_revenue_earners(10).length).to eq(10)
+    expect(@sales_analyst.top_revenue_earners(10).last.class).to eq(Merchant)
+  end
+
+  it "will return the top 20 merchants by default" do
+    expect(@sales_analyst.top_revenue_earners.first.id).to eq(12334634)
+    expect(@sales_analyst.top_revenue_earners.last.id).to eq(12334159)
+    expect(@sales_analyst.top_revenue_earners.length).to eq(20)
+  end
+
+  xit "will return all merchants with pending invoices" do
+    expect(@sales_analyst.merchants_with_pending_invoices.length).to eq(467)
+    expect(@sales_analyst.merchants_with_pending_invoices.first.class).to eq(Merchant)
+  end
+
+  it "can determine merchants with only 1 item" do
+    expect(@sales_analyst.merchants_with_only_one_item.length).to eq(243)
+    expect(@sales_analyst.merchants_with_only_one_item.first.class).to eq(Merchant)
+  end
 end

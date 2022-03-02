@@ -49,7 +49,10 @@ class InvoiceRepository
     updated_item.updated_at = Date.today.to_s
   end
 
-
+  def find_all_by_date(date)
+    @all.find_all{|invoice|
+   invoice.created_at[0..9] == date}
+  end
 
   include SalesModule
 

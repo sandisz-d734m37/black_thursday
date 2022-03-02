@@ -42,4 +42,10 @@ class InvoiceItemRepository
     updated_item.updated_at = Time.now
   end
 
+  def find_all_by_date(date)
+    @all.find_all{|invoice|
+   invoice.created_at[0..9] == date}
+   # binding.pry}
+  end
+
 end

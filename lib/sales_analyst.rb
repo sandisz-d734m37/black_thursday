@@ -198,4 +198,53 @@ class SalesAnalyst
     prices_array = to_check.map {|items| (items.unit_price * items.quantity)}
     prices_array.sum
   end
+
+  def total_revenue_by_date(date)
+    inv_to_check = @invoices.find_all_by_date(date)
+    inv_to_check = inv_to_check.map{|inv| inv.id}
+    inv_to_check.map{|inv| invoice_total(inv)}.sum
+  end
+
+  def total_revenue_by_merchant(merchant_id)
+    inv_to_check = @invoices.find_all_by_merchant_id(merchant_id)
+    inv_to_check = inv_to_check.map{|inv| inv.id}
+    inv_to_check2 = Array.new
+    inv_to_check.each {|inv| inv_to_check2 << @transactions.find_all_by_invoice_id(inv)}
+    inv_to_check2.flatten!
+    inv_to_check2 = inv_to_check2.find_all {|transactions| transactions.result == "success"}
+    inv_to_check2 = inv_to_check2.map{|transaction| transaction.invoice_id}.uniq
+    inv_to_check2.map{|inv| invoice_total(inv)}.sum
+  end
+
+  def top_revenue_earners(x = 20)
+    merchant_by_revenue = Hash.new(0)
+    test = @merchants.all.each {|merchant| merchant_by_revenue[merchant] = total_revenue_by_merchant(merchant.id)}
+    merchant_by_revenue = merchant_by_revenue.sort_by{|k, v| v}.reverse
+    merchant_by_revenue = merchant_by_revenue.map {|index| index[0]}
+    merchant_by_revenue[0..(x-1)]
+   end
+
+  def merchants_with_pending_invoices
+    all_inv = []
+    inv_to_check = @transactions.find_all_by_result("failed")
+    inv_to_check = inv_to_check.map {|inv| inv.invoice_id}
+    inv_to_check = inv_to_check.map {|inv_id| @invoices.find_by_id(inv_id)}
+    inv_to_check = inv_to_check.map {|inv| inv.merchant_id}.uniq
+    all_inv << inv_to_check
+    inv_to_check2 = @invoices.find_all_by_status(:pending)
+    inv_to_check2 = inv_to_check2.map {|inv|inv.merchant_id}.uniq
+    all_inv << inv_to_check2
+    all_inv = all_inv.flatten.uniq
+    # binding.pry
+    all_inv.map {|merchant_id| @merchants.find_by_id(merchant_id)}
+  end
+
+  def merchants_with_only_one_item
+    merchant_counts = Hash.new(0)
+    merchants_to_check = @items.all.map {|item| item.merchant_id}
+    merchants_to_check.each {|merch_id| merchant_counts[merch_id]+= 1}
+    merchant_counts = merchant_counts.find_all {|merch_id, count| count == 1}
+    merchant_counts.map {|merch_id| @merchants.find_by_id(merch_id[0])}
+  end
+
 end
