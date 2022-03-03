@@ -202,4 +202,12 @@ describe SalesAnalyst do
     expect(expected.length).to eq 2
     expect(expected.first).to be_a Item
   end
+
+  it "" do
+
+    expect(@sales_analyst.best_item_for_merchant(12334194)).to eq()
+
+  end
+
+
 end
