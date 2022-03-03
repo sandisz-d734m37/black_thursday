@@ -14,8 +14,6 @@ RSpec.describe Item do
     :updated_at  => Time.new(2002, 10, 31),
     :merchant_id => 2
     })
-    # allow(@i.created_at).to receive(:time).and_return(@time_now)
-    # allow(@i.updated_at).to receive(:time).and_return(@time_now)
   end
 
   describe "instantiation" do
@@ -25,19 +23,21 @@ RSpec.describe Item do
 
 
     it "has readable attributes" do
-      # require 'pry'; binding.pry
-      # allow(Time).to receive(:now).and_return(@time_now)
       expect(@i.id).to eq(1)
       expect(@i.name).to eq("Pencil")
       expect(@i.description).to eq("You can use it to write things")
       expect(@i.unit_price).to eq(BigDecimal(10.99,4))
+      expect(@i.unit_price.class).to eq BigDecimal
       expect(@i.merchant_id).to eq(2)
       expect(@i.created_at).to eq(Time.new(2002, 10, 29))
+      expect(@i.created_at.class).to eq Time
       expect(@i.updated_at).to eq(Time.new(2002, 10, 31))
+      expect(@i.updated_at.class).to eq Time
     end
   end
 
     it "returns price of item in dollars as a float" do
       expect(@i.unit_price_to_dollars).to eq(10.99)
+      expect(@i.unit_price_to_dollars.class).to eq Float
     end
 end

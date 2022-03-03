@@ -15,7 +15,6 @@ describe CustomerRepository do
         :invoice_items => './data/invoice_items.csv'
                               })
   end
-  # customer_rep = CustomerRepository.new('./data/customers.csv')
 
   it "exists" do
     expect(@se.customers).to be_an_instance_of(CustomerRepository)
@@ -33,19 +32,16 @@ describe CustomerRepository do
   end
 
   it "can find all instances of Customers with the same first name" do
-    # require 'pry'; binding.pry
     cust = @se.customers.find_all_by_first_name("Lincoln")
     expect(cust.length).to eq(2)
   end
 
   it "can find all instances of Customers with the same last name" do
-     # require 'pry'; binding.pry
     cust = @se.customers.find_all_by_last_name("Schamberger")
     expect(cust.length).to eq(5)
   end
 
   it "can create a new instance of the customer class" do
-     # require 'pry'; binding.pry
     c = ({
       :first_name => "Leopold",
       :last_name => "Schamberger",

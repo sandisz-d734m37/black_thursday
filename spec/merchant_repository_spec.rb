@@ -18,11 +18,14 @@ describe MerchantRepository do
   it "can find an instance of Merchant using it's ID" do
     expect(merch_rep.find_by_id(12334319).name).to eq('dansoilpaintings')
     expect(merch_rep.find_by_id(12334189).name).to eq('JacquieMann')
-    expect(merch_rep.find_by_id('nothing')).to be_nil
+    expect(merch_rep.find_by_id(101)).to be_nil
   end
 
   it "can find an instance of Merchant using it's name" do
-    expect(merch_rep.find_by_name('GJGemology')).to eq(merch_rep.all[26])
+    test = merch_rep.find_by_name('LEABURROT')
+    expect(test.id).to eq(12334411)
+    test2 = merch_rep.find_by_name('leaburrot')
+    expect(test.id).to eq(12334411)
     expect(merch_rep.find_by_name('SWISSIonenSchmuck')).to eq(merch_rep.all[204])
     expect(merch_rep.find_by_name('nothing')).to be_nil
   end
@@ -43,7 +46,7 @@ describe MerchantRepository do
     expect(merch_rep.all[-1].name).to eq('Not A Real Merchant')
     merch_rep.update(12337412, 'Actually a Real Merchant')
     expect(merch_rep.all[-1].name).to eq('Actually a Real Merchant')
-    # binding.pry
+    merch_rep.update(12337412, 'Actually a Real Merchant')
   end
 
   it 'can delete a merchant based on their id' do

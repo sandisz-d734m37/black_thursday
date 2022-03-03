@@ -276,4 +276,7 @@ class SalesAnalyst
     test.filter_map {|k, v| k if test.values.first == v}
   end
 
+  def best_item_for_merchant(merchant_id) #in terms of revenue generated
+
+  end
 end

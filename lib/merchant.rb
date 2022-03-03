@@ -1,6 +1,9 @@
 require 'csv'
+require 'sales_module'
 
 class Merchant
+  include SalesModule
+
   attr_reader :created_at, :id
   attr_accessor :name, :updated_at
   def initialize(data)
