@@ -265,7 +265,7 @@ class SalesAnalyst
     all_success_invoices = all_success_invoices.reject {|invoice| invoice.status == :returned}
     all_success_invoices.map {|invoice| @invoice_items.find_all_by_invoice_id(invoice.id)}
   end
-
+q
   def most_sold_item_for_merchant(merchant_id)
     ii_by_merch = successful_invoices_by_merchant(merchant_id)
     items_hash = Hash.new(0)
@@ -284,8 +284,6 @@ class SalesAnalyst
     items_hash = items_hash.each {|k, v| prices_hash[k] = v * k.unit_price}
     prices_hash = prices_hash.sort_by {|k, v| v}.reverse!.to_h
     @items.find_by_id(prices_hash.keys.first.item_id)
-    # binding.pry
-
   end
 
 end

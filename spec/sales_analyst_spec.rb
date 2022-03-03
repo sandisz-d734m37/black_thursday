@@ -203,9 +203,10 @@ describe SalesAnalyst do
     expect(expected.first).to be_a Item
   end
 
-  it "" do
+  it "best_item_for_merchant" do
+    binding.pry
 
-    expect(@sales_analyst.best_item_for_merchant(12334194)).to eq()
+    expect(@sales_analyst.best_item_for_merchant(12334194).item_id).to eq(263546924)
 
   end
 
