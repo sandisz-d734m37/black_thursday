@@ -257,22 +257,23 @@ class SalesAnalyst
     arry.map{|merchant| merchant[0]}
   end
 
-  def most_sold_item_for_merchant(merchant_id)
+  def successful_invoices_by_merchant(merchant_id)
     all_success_trans = @transactions.find_all_by_result("success")
     all_success_trans = all_success_trans.map {|trans| trans.invoice_id}
     all_invoices_of_merch = @invoices.find_all_by_merchant_id(merchant_id)
     all_success_invoices = all_invoices_of_merch.select {|invoice| all_success_trans.include?(invoice.id)}
     all_success_invoices = all_success_invoices.reject {|invoice| invoice.status == :returned}
-    ii_by_merch = all_success_invoices.map {|invoice| @invoice_items.find_all_by_invoice_id(invoice.id)}
+    all_success_invoices.map {|invoice| @invoice_items.find_all_by_invoice_id(invoice.id)}
+  end
+
+  def most_sold_item_for_merchant(merchant_id)
+    ii_by_merch = successful_invoices_by_merchant(merchant_id)
     items_hash = Hash.new(0)
     ii_by_merch.flatten.each {|ii| items_hash[ii.item_id] += ii.quantity}
     items_hash = items_hash.sort_by {|k, v| v}.reverse!.to_h
     test = Hash.new(0)
     items_hash.each {|k, v| test[@items.find_by_id(k)] = v}
-    final = Array.new(0)
-    test = test.each {|k, v| final << k if test.values.first == v}
-    final
-    binding.pry
+    test.filter_map {|k, v| k if test.values.first == v}
   end
 
 end
