@@ -276,7 +276,13 @@ class SalesAnalyst
     test.filter_map {|k, v| k if test.values.first == v}
   end
 
-  def best_item_for_merchant(merchant_id) #in terms of revenue generated
-
+   def best_item_for_merchant(merchant_id)
+    ii_by_merch = successful_invoices_by_merchant(merchant_id)
+    items_hash = Hash.new(0)
+    ii_by_merch.flatten.each {|ii| items_hash[ii] += ii.quantity}
+    prices_hash = Hash.new(0)
+    items_hash = items_hash.each {|k, v| prices_hash[k] = v * k.unit_price}
+    prices_hash = prices_hash.sort_by {|k, v| v}.reverse!.to_h
+    @items.find_by_id(prices_hash.keys.first.item_id)
   end
 end
