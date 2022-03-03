@@ -266,8 +266,13 @@ class SalesAnalyst
     ii_by_merch = all_success_invoices.map {|invoice| @invoice_items.find_all_by_invoice_id(invoice.id)}
     items_hash = Hash.new(0)
     ii_by_merch.flatten.each {|ii| items_hash[ii.item_id] += ii.quantity}
-    items_hash = items_hash.sort_by {|k, v| v}.reverse!
-
+    items_hash = items_hash.sort_by {|k, v| v}.reverse!.to_h
+    test = Hash.new(0)
+    items_hash.each {|k, v| test[@items.find_by_id(k)] = v}
+    final = Array.new(0)
+    test = test.each {|k, v| final << k if test.values.first == v}
+    final
+    binding.pry
   end
 
 end
