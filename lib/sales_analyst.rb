@@ -265,7 +265,7 @@ class SalesAnalyst
     all_success_invoices = all_success_invoices.reject {|invoice| invoice.status == :returned}
     all_success_invoices.map {|invoice| @invoice_items.find_all_by_invoice_id(invoice.id)}
   end
-
+q
   def most_sold_item_for_merchant(merchant_id)
     ii_by_merch = successful_invoices_by_merchant(merchant_id)
     items_hash = Hash.new(0)
@@ -274,6 +274,16 @@ class SalesAnalyst
     test = Hash.new(0)
     items_hash.each {|k, v| test[@items.find_by_id(k)] = v}
     test.filter_map {|k, v| k if test.values.first == v}
+  end
+
+  def best_item_for_merchant(merchant_id)
+    ii_by_merch = successful_invoices_by_merchant(merchant_id)
+    items_hash = Hash.new(0)
+    ii_by_merch.flatten.each {|ii| items_hash[ii] += ii.quantity}
+    prices_hash = Hash.new(0)
+    items_hash = items_hash.each {|k, v| prices_hash[k] = v * k.unit_price}
+    prices_hash = prices_hash.sort_by {|k, v| v}.reverse!.to_h
+    @items.find_by_id(prices_hash.keys.first.item_id)
   end
 
 end
