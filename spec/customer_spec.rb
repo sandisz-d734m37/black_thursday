@@ -9,8 +9,8 @@ RSpec.describe Customer do
   :id => 1,
   :first_name => "Joey",
   :last_name => "Ondricka",
-  :created_at => Time.parse("2012-03-27 14:54:09 UTC"),
-  :updated_at => Time.parse("2012-03-27 14:54:09 UTC")
+  :created_at => "2012-03-27 14:54:09 UTC",
+  :updated_at => "2012-03-27 14:54:09 UTC"
   })
   end
 

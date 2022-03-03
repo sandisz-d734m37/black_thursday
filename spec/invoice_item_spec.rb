@@ -14,8 +14,8 @@ RSpec.describe InvoiceItem do
       :invoice_id => 8,
       :quantity => 1,
       :unit_price => BigDecimal(1099,4),
-      :created_at => Time.new(2022, 02, 27),
-      :updated_at => Time.new(2022, 02, 28)
+      :created_at => Time.new(2022, 02, 27).to_s,
+      :updated_at => Time.new(2022, 02, 28).to_s
                           })
   end
 

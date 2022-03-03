@@ -128,7 +128,7 @@ describe SalesAnalyst do
     expect(@sales_analyst.invoice_status(:returned)).to eq(13.5)
   end
 
-  it "SalesAnalyst is_paid_in_full? returns true if the invoice is paid in full" do
+  it "is_paid_in_full? returns true if the invoice is paid in full" do
     expected = @sales_analyst.invoice_paid_in_full?(1)
     expect(expected).to eq true
 
@@ -186,6 +186,7 @@ describe SalesAnalyst do
 
   it "can return merchants that only sell one item by the month" do
     expect(@sales_analyst.merchants_with_only_one_item_registered_in_month("June").length).to eq(18)
+    expect(@sales_analyst.merchants_with_only_one_item_registered_in_month("March").length).to eq(21)
   end
 
   it "gets all the successful invoices by the merchant id" do
@@ -204,10 +205,7 @@ describe SalesAnalyst do
   end
 
   it "best_item_for_merchant" do
-    binding.pry
-
-    expect(@sales_analyst.best_item_for_merchant(12334194).item_id).to eq(263546924)
-
+    expect(@sales_analyst.best_item_for_merchant(12334194).id).to eq(263546924)
   end
 
 
