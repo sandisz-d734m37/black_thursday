@@ -180,12 +180,26 @@ describe SalesAnalyst do
   end
 
   it "can find the total revenue for a single merchant" do
-    # require 'pry'; binding.pry
     expect(@sales_analyst.revenue_by_merchant(12334194)).to eq(BigDecimal(81572.4, 6))
     expect(@sales_analyst.revenue_by_merchant(12334194).class).to eq(BigDecimal)
   end
 
   it "can return merchants that only sell one item by the month" do
     expect(@sales_analyst.merchants_with_only_one_item_registered_in_month("June").length).to eq(18)
+  end
+
+  it "gets all the successful invoices by the merchant id" do
+    expected = @sales_analyst.successful_invoices_by_merchant(12334194)
+    expect(expected.length).to eq 8
+    test = expected.dig(0, 1)
+    expect(test.item_id).to be 263447961
+    expect(test.quantity).to be 1
+    expect(expected.flatten.first.class).to eq InvoiceItem
+  end
+
+  it 'gets the most sold items by merchant'do
+    expected = @sales_analyst.most_sold_item_for_merchant(12334194)
+    expect(expected.length).to eq 2
+    expect(expected.first).to be_a Item
   end
 end
