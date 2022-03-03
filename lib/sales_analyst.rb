@@ -187,10 +187,7 @@ class SalesAnalyst
 
   def invoice_paid_in_full?(invoice_id)
     to_check = @transactions.find_all_by_invoice_id(invoice_id)
-    if to_check == []
-      return false
-    end
-    to_check.all? {|transaction| transaction.result == "success"}
+    to_check.any? {|transaction| transaction.result == :success} && to_check != []
   end
 
   def invoice_total(invoice_id)
@@ -208,11 +205,8 @@ class SalesAnalyst
   def revenue_by_merchant(merchant_id)
     inv_to_check = @invoices.find_all_by_merchant_id(merchant_id)
     inv_to_check = inv_to_check.map{|inv| inv.id}
-    # inv_to_check2 = Array.new
-    # inv_to_check.each {|inv| inv_to_check2 << @transactions.find_all_by_invoice_id(inv)}
-    # inv_to_check2.flatten!
     inv_to_check = inv_to_check.map {|inv|  @transactions.find_all_by_invoice_id(inv)}.flatten!
-    inv_to_check = inv_to_check.find_all {|transactions| transactions.result == "success"}
+    inv_to_check = inv_to_check.find_all {|transactions| transactions.result == :success}
     inv_to_check = inv_to_check.map{|transaction| transaction.invoice_id}.uniq
     inv_to_check.map{|inv| invoice_total(inv)}.sum
   end
@@ -227,15 +221,9 @@ class SalesAnalyst
 
   def merchants_with_pending_invoices
     all_inv = []
-    inv_to_check = @transactions.find_all_by_result("failed")
-    inv_to_check = inv_to_check.map {|inv| inv.invoice_id}
-    inv_to_check = inv_to_check.map {|inv_id| @invoices.find_by_id(inv_id)}
-    inv_to_check = inv_to_check.map {|inv| inv.merchant_id}.uniq
-    all_inv << inv_to_check
-    inv_to_check2 = @invoices.find_all_by_status(:pending)
-    inv_to_check2 = inv_to_check2.map {|inv|inv.merchant_id}.uniq
-    all_inv << inv_to_check2
-    all_inv = all_inv.flatten.uniq
+    inv_to_check2 = @invoices.all.find_all {|invoice| !invoice_paid_in_full?(invoice.id)}
+    inv_to_check2.each {|inv| all_inv << inv.merchant_id}
+    all_inv = all_inv.uniq
     all_inv.map {|merchant_id| @merchants.find_by_id(merchant_id)}
   end
 
@@ -258,14 +246,14 @@ class SalesAnalyst
   end
 
   def successful_invoices_by_merchant(merchant_id)
-    all_success_trans = @transactions.find_all_by_result("success")
+    all_success_trans = @transactions.find_all_by_result(:success)
     all_success_trans = all_success_trans.map {|trans| trans.invoice_id}
     all_invoices_of_merch = @invoices.find_all_by_merchant_id(merchant_id)
     all_success_invoices = all_invoices_of_merch.select {|invoice| all_success_trans.include?(invoice.id)}
     all_success_invoices = all_success_invoices.reject {|invoice| invoice.status == :returned}
     all_success_invoices.map {|invoice| @invoice_items.find_all_by_invoice_id(invoice.id)}
   end
-q
+
   def most_sold_item_for_merchant(merchant_id)
     ii_by_merch = successful_invoices_by_merchant(merchant_id)
     items_hash = Hash.new(0)
@@ -284,6 +272,7 @@ q
     items_hash = items_hash.each {|k, v| prices_hash[k] = v * k.unit_price}
     prices_hash = prices_hash.sort_by {|k, v| v}.reverse!.to_h
     @items.find_by_id(prices_hash.keys.first.item_id)
+    # binding.pry
   end
 
 end

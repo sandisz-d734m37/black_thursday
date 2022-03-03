@@ -30,21 +30,21 @@ class InvoiceItemRepository
       invoice_id: data[:invoice_id],
       quantity: data[:quantity],
       unit_price: data[:unit_price],
-      created_at: Time.now,
-      updated_at: Time.now})
+      created_at: Time.now.to_s,
+      updated_at: Time.now.to_s})
       @all << new_item
   end
 
   def update(id, attribute)
     updated_item = @all.find{|invoice| invoice.id == id}
-    updated_item.quantity = attribute[:quantity]
-    updated_item.unit_price = attribute[:unit_price]
+    updated_item.quantity = attribute[:quantity] unless attribute[:quantity].nil?
+    updated_item.unit_price = attribute[:unit_price] unless attribute[:unit_price].nil?
     updated_item.updated_at = Time.now
   end
 
   def find_all_by_date(date)
     @all.find_all{|invoice|
-   invoice.created_at[0..9] == date}
+   invoice.created_at.to_s[0..9] == date}
    # binding.pry}
   end
 

@@ -16,8 +16,8 @@ class InvoiceItem
     @invoice_id = data[:invoice_id].to_i
     @quantity = data[:quantity].to_i
     @unit_price = BigDecimal((data[:unit_price]), 4) / 100
-    @created_at = data[:created_at]
-    @updated_at = data[:updated_at]
+    @created_at = Time.parse(data[:created_at])
+    @updated_at = Time.parse(data[:updated_at])
   end
 
   def self.read_file(csv)

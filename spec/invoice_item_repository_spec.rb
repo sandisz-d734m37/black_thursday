@@ -29,6 +29,22 @@ RSpec.describe InvoiceItemRepository do
     expect(@se.invoice_items.all[1]).to be_a(InvoiceItem)
   end
 
+  it "has access to Invoice Items with readable attributes" do
+    invoice_item = @se.invoice_items.find_by_id(2345)
+    expect(invoice_item.id).to eq 2345
+    expect(invoice_item.id.class).to eq Fixnum
+    expect(invoice_item.item_id).to eq 263562118
+    expect(invoice_item.item_id.class).to eq Fixnum
+    expect(invoice_item.invoice_id).to eq 522
+    expect(invoice_item.invoice_id.class).to eq Fixnum
+    expect(invoice_item.unit_price).to eq 847.87
+    expect(invoice_item.unit_price.class).to eq BigDecimal
+    expect(invoice_item.created_at).to eq Time.parse("2012-03-27 14:54:35 UTC")
+    expect(invoice_item.created_at.class).to eq Time
+    expect(invoice_item.updated_at).to eq Time.parse("2012-03-27 14:54:35 UTC")
+    expect(invoice_item.updated_at.class).to eq Time
+  end
+
   it 'can find by the item id' do
     id = 10
     expected = @se.invoice_items.find_by_id(id)
@@ -59,8 +75,8 @@ RSpec.describe InvoiceItemRepository do
         :invoice_id => 8,
         :quantity => 1,
         :unit_price => BigDecimal(10.99, 4),
-        :created_at => Time.now,
-        :updated_at => Time.now
+        :created_at => Time.now.to_s,
+        :updated_at => Time.now.to_s
       }
       @se.invoice_items.create(attributes)
       expected = @se.invoice_items.find_by_id(21831)
@@ -73,8 +89,8 @@ RSpec.describe InvoiceItemRepository do
         :invoice_id => 8,
         :quantity => 1,
         :unit_price => BigDecimal(10.99, 4),
-        :created_at => Time.now,
-        :updated_at => Time.now
+        :created_at => Time.now.to_s,
+        :updated_at => Time.now.to_s
       }
       @se.invoice_items.create(attributes)
     original_time = @se.invoice_items.find_by_id(21831).updated_at
@@ -98,9 +114,11 @@ RSpec.describe InvoiceItemRepository do
         :updated_at => Time.now
       }
     @se.invoice_items.create(attributes)
+    expected = @se.invoice_items.find_by_id(21831)
+    expect(expected.id).to eq 21831
     @se.invoice_items.delete(21831)
-      expected = @se.invoice_items.find_by_id(21831)
-      expect(expected).to eq nil
+    expected = @se.invoice_items.find_by_id(21831)
+    expect(expected).to eq nil
   end
 
   it "can find all by date" do
