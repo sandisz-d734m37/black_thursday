@@ -27,7 +27,6 @@ RSpec.describe InvoiceRepository do
   end
 
   it "can find by id" do
-
     inv = @se.invoices.find_by_id(3452)
     expect(inv.merchant_id).to eq(12335690)
     expect(inv.status).to eq(:pending)
@@ -36,11 +35,15 @@ RSpec.describe InvoiceRepository do
   it "can find_all_by_merchant_id" do
     inv = @se.invoices.find_all_by_merchant_id(12335080)
     expect(inv.length).to eq(7)
+    inv = @se.invoices.find_all_by_merchant_id(1000)
+    expect(inv).to eq([])
   end
 
   it "can find_all_by_customer_id" do
     inv = @se.invoices.find_all_by_customer_id(300)
     expect(inv.length).to eq(10)
+    inv = @se.invoices.find_all_by_customer_id(1000)
+    expect(inv).to eq([])
   end
 
   it "can find all by status" do

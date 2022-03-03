@@ -44,6 +44,7 @@ describe SalesAnalyst do
     expect(@sales_analyst.merchants_with_high_item_count[0].name).to eq("FlavienCouche")
     expect(@sales_analyst.merchants_with_high_item_count[2].name).to eq("BowlsByChris")
     expect(@sales_analyst.merchants_with_high_item_count[35].name).to eq("BoDaisyClothing")
+    expect(@sales_analyst.merchants_with_high_item_count.length).to eq 52
   end
 
   it "can determine average item price for merchant" do
@@ -203,10 +204,8 @@ describe SalesAnalyst do
     expect(expected.length).to eq 2
     expect(expected.first).to be_a Item
   end
-
+  
   it "best_item_for_merchant" do
     expect(@sales_analyst.best_item_for_merchant(12334194).id).to eq(263546924)
   end
-
-
 end

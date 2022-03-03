@@ -15,18 +15,41 @@ RSpec.describe ItemRepository do
         :invoice_items => './data/invoice_items.csv'
                               })
   end
-  #   @item_repo1 = ItemRepository.new('./data/items.csv')
-  # end
-  # include SalesModule
+
   describe "instantiation" do
     it "exists" do
       expect(@se.items).to be_a(ItemRepository)
-      # expect(@item_repo1).to be_a(ItemRepository)
     end
 
     it "has readable attributes" do
       expect(@se.items.all.length).to eq(1367)
     end
+  end
+
+  it "can find an item by id" do
+    id = 263538760
+    expected = @se.items.find_by_id(id)
+
+    expect(expected.id).to eq id
+    expect(expected.name).to eq "Puppy blankie"
+
+    id = 1
+    expected = @se.items.find_by_id(id)
+
+    expect(expected).to eq nil
+  end
+
+  it "finds an item by name" do
+    name = "Puppy blankie"
+    expected = @se.items.find_by_name(name)
+
+    expect(expected.name).to eq name
+    expect(expected.id).to eq 263538760
+
+    name = "Sales Engine"
+    expected = @se.items.find_by_name(name)
+
+    expect(expected).to eq nil
   end
 
   it "can return an array of all items" do
@@ -72,4 +95,5 @@ RSpec.describe ItemRepository do
     @se.items.delete(263567475)
     expect(@se.items.find_all_by_merchant_id(12334213).length).to eq(2)
   end
+
 end

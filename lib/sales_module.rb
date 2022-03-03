@@ -4,12 +4,12 @@ module SalesModule
   end
 
   def find_by_name(name)
-    @all.find{|individual| individual.name == name}
+    @all.find{|individual| individual.name.downcase == name.downcase}
   end
 
   def find_all_by_name(name)
     found = []
-    found << @all.find_all{|individual| individual.name.downcase == name.downcase}
+    found << @all.select {|individual| individual.name.downcase.include?(name.downcase)}
     found.flatten
   end
 

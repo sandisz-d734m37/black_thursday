@@ -24,6 +24,5 @@ RSpec.describe Merchant do
     test = Merchant.read_file('./data/merchants.csv')
     expect(test.length).to eq(475)
   end
-
-
+  
 end
